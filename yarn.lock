@@ -544,7 +544,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.2.0"
 
-"@babel/plugin-transform-react-jsx@^7.0.0", "@babel/plugin-transform-react-jsx@^7.0.0 <7.4.0":
+"@babel/plugin-transform-react-jsx@^7.0.0", "@babel/plugin-transform-react-jsx@^7.0.0 <7.4.0", "@babel/plugin-transform-react-jsx@^7.1.6":
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.3.0.tgz#f2cab99026631c767e2745a5368b331cfe8f5290"
   dependencies:
@@ -803,6 +803,21 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@emotion/babel-plugin-jsx-pragmatic@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin-jsx-pragmatic/-/babel-plugin-jsx-pragmatic-0.1.2.tgz#bb98bbef8effe83418307563c34e784deae57a1a"
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.2.0"
+
+"@emotion/babel-preset-css-prop@^10.0.5":
+  version "10.0.9"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-10.0.9.tgz#70386bd88fe4d8896e1b9729364daf3a6051f726"
+  dependencies:
+    "@babel/plugin-transform-react-jsx" "^7.1.6"
+    "@emotion/babel-plugin-jsx-pragmatic" "^0.1.2"
+    babel-plugin-emotion "^10.0.9"
+    object-assign "^4.1.1"
+
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
   resolved "https://registry.yarnpkg.com/@emotion/babel-utils/-/babel-utils-0.6.10.tgz#83dbf3dfa933fae9fc566e54fbb45f14674c6ccc"
@@ -823,7 +838,7 @@
     "@emotion/utils" "0.11.1"
     "@emotion/weak-memoize" "0.2.2"
 
-"@emotion/core@^10.0.9":
+"@emotion/core@^10.0.10", "@emotion/core@^10.0.9":
   version "10.0.10"
   resolved "https://registry.yarnpkg.com/@emotion/core/-/core-10.0.10.tgz#8d3114e5a2f8b178a7067c603a2937516f180b08"
   dependencies:
@@ -895,7 +910,7 @@
     "@emotion/utils" "0.11.1"
     object-assign "^4.1.1"
 
-"@emotion/styled@^10.0.9":
+"@emotion/styled@^10.0.10", "@emotion/styled@^10.0.9":
   version "10.0.10"
   resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-10.0.10.tgz#ec241a9389a585b2c2638b709c262c28469ed92e"
   dependencies:
@@ -4904,6 +4919,13 @@ gatsby-link@^2.0.16:
     "@babel/runtime" "^7.0.0"
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
+
+gatsby-plugin-emotion@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.0.6.tgz#5f496df66b2640874fcb073e4f2d8a2a1a4632da"
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    "@emotion/babel-preset-css-prop" "^10.0.5"
 
 gatsby-plugin-netlify-cms@^3.0.15:
   version "3.0.17"
