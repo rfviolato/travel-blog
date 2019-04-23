@@ -1,5 +1,5 @@
 ---
 templateKey: home-page
-title: Great coffee with a conscience
-image: /img/home-jumbotron.jpg
+title: Amsterdam is fucking awesome!
+image: /img/home-hero-placeholder.jpg
 ---
