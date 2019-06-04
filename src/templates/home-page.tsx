@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import Hero from '../components/Hero';
+import { FeaturedPosts, Hero } from '../components/home/index';
 import Layout from '../components/Layout';
 
 type IHeroQueryData = IGastbyQueryData<{ image: IGastbyImage }>;
@@ -8,6 +8,19 @@ type IHeroQueryData = IGastbyQueryData<{ image: IGastbyImage }>;
 interface IHomePageTemplateProps {
   heroImg: IGastbyImage;
 }
+
+const mockData = [
+  {
+    description: 'Howdy',
+    id: '1',
+    title: 'Fetaured Post 1'
+  },
+  {
+    description: 'Egg',
+    id: '2',
+    title: 'Fetaured Post 2'
+  }
+];
 
 export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
   heroImg
@@ -19,21 +32,7 @@ export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
   return (
     <div>
       <Hero heroImageSrc={heroImageSrc} />
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit
-        massa nec elit luctus, sit amet auctor mi lobortis. Aenean vulputate
-        tincidunt ante quis porttitor. Aenean a ante nisi. Vivamus consequat
-        faucibus arcu et commodo. Quisque accumsan accumsan odio, cursus
-        accumsan dui condimentum ac. Fusce eu odio non sapien condimentum
-        maximus ut nec elit. Morbi posuere, elit vitae semper tristique, ligula
-        libero consequat turpis, eget tempus arcu lorem id urna. Pellentesque
-        sit amet nibh nec massa tincidunt rhoncus ut id tellus. Maecenas tempor
-        eros vitae nulla mollis lacinia. Nulla laoreet libero vitae aliquet
-        faucibus. Maecenas nec egestas libero, eu ornare neque. Aenean eu
-        maximus odio. Curabitur eget lorem ac tellus molestie sollicitudin non
-        sit amet eros. Vivamus nec sem nisl. Maecenas quis suscipit magna. Fusce
-        quis ligula efficitur, dapibus dolor nec, dignissim magna.
-      </div>
+      <FeaturedPosts posts={mockData} />
     </div>
   );
 };
