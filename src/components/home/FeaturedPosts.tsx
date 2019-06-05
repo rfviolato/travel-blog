@@ -7,10 +7,8 @@ interface IFeaturedPost {
   imageSrc: string;
 }
 
-interface IFeaturedPostListItem {
+interface IFeaturedPostListItem extends IFeaturedPost {
   id: string;
-  title: string;
-  description: string;
 }
 
 interface IFeaturedPostProps {
@@ -32,7 +30,7 @@ const FeaturedPostContainer = styled.div`
 
 const FeaturedPostInfo = styled.div`
   padding: 80px 20px 20px;
-  background-color: #ededed;
+  background-color: #eee;
   flex: 1 1 50%;
 `;
 
@@ -51,14 +49,14 @@ const FeaturedPostInfoTitle = styled.div`
 `;
 
 const FeaturedPostInfoDescription = styled.div`
-  font-size: 15px;
-  margin-top: 15px;
+  font-size: 14px;
+  margin-top: 12px;
 `;
 
 const FeaturedPost: React.SFC<IFeaturedPost> = ({
   title,
   description,
-  imageSrc
+  imageSrc,
 }) => (
   <FeaturedPostContainer>
     <FeaturedPostInfo>
@@ -77,9 +75,9 @@ const FeaturedPostWrapper = styled.div`
 const FeaturedPosts: React.SFC<IFeaturedPostProps> = ({ posts }) => {
   return (
     <div>
-      {posts.map(({ id, ...post }) => {
-        return <FeaturedPost key={id} {...post} />;
-      })}
+      {posts.map(({ id, ...post }) => (
+        <FeaturedPost key={id} {...post} />
+      ))}
     </div>
   );
 };

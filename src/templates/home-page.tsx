@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { FeaturedPosts, Hero } from '../components/home/index';
+import { FeaturedPosts, Hero, RecentPosts } from '../components/home/index';
 import Layout from '../components/Layout';
 
 type IHeroQueryData = IGastbyQueryData<{ image: IGastbyImage }>;
@@ -9,27 +9,75 @@ interface IHomePageTemplateProps {
   heroImg: IGastbyImage;
 }
 
-const mockData = [
+const mockFeaturedPostsData = [
   {
     description:
-      'Já dizia Alberto Caeiro, um dos heterônimos de Fernando Pessoa: "Pelo Tejo vai-se para o mundo". E foi assim que os portugueses chegaram até nós. Agora, é nossa vez de voltar às terras portuguesas, seja pelas águas do rio Tejo, que corta Lisboa e confere a ela uma paisagem toda especial, ou por...',
+      'The most striking thing about Amsterdam is just how true the stereotypes are: The locals are tall, apple-cheeked, and good-looking as they sail past you on fixed-gear bikes; the tree-lined canals are just as picturesque as you’ve heard, and the restaurants and shops are as cozy and well priced as those practical Dutch demand.',
     id: '1',
     imageSrc:
-      'https://lh3.googleusercontent.com/fzfulqg2OFOajGRUXexEj70ND02xk18rldjIkz_HdHTBZgptDxxyO1cyxRIDI3W2UUz656Fye-jGQy25OviBpCDYok187F31u3I_WKlOb5kYNurHl7_XLfyMHWfGLgmMzKIDwek1vLeGmpr4M7llgzN0u1caqQiwngZ3V1ttmBovSjM-cYdg8kv42HKGjKQQcXO18AYndNHRrO4nXmWHAiss5OFj_6XiD-xIM-gYYGHk-I33frA1ShuIqMpqqfTDJB1XNa2hilW0tPcLUVFcvfpgny2fT_keZDHExcNAlgbs4OuBC6oA40iGlFUgc4CqpOFvuqSFE_uCQSzG6HZVtQ1FfmzRlP6zA3_QeIcrId1k12KgT8iBbP6OZMpKOAa5pRNYobF-cvUORYQWaHuyjH8bA46Mzsp5-CpLHrRY0SYJSil0OS-j8AgjOMOW7ZQtBOeyNb8DBbGgLPcDRh9YmjHi2SpCl8z6RHJWhckt5oG0rHU1L3_cUbHDGjgG0FE8aEfMjXooXrVOx6zYyKai87g96Lg-8QUCETgZ3m9M1nuJedjVC9eUSGPSFMYUiRfjoNfx4dqFtQ9WiOftnvnCU46q4Bu_ud82Ms6n7NUz6z9SPuB-70b2rkpirnx9v5c-i1bNTHsjOQAUfhxfVkEfIJIEXFWTViGdt5qb4kJOrWa6WJxEXFyGXUnI8pYPg8Psyo-4NQefI-3Z9qNpvSXkUxsD=w2444-h1832-no',
-    title: 'Lisboa'
+      'https://assets.vogue.com/photos/58913999736d5f2410e37356/master/w_1560,c_limit/0-holding-de-pijp-amsterdam-travel-guide.jpg',
+    title: 'De Pijp',
   },
   {
     description:
-      'Situada às margens do Rio Douro, a aproximadamente 300 km da capital Lisboa, a cidade do Porto encanta logo no primeiro dia. Seja por chegar e dar de cara com o centro histórico que é declarado Patrimônio Mundial pela Unesco ou então por se encantar à primeira vista com o Rio Douro que margeia boa parte da cidade.',
+      'The low-rise neighborhood Zuidoost is located in a historically charged place. In the past, there were the Egeldonk and Echtenstein honeycomb apartments that have virtually disappeared completely with the breaker. Instead of the massive concrete flats of the time, one now finds a neighborhood on a human scale. ',
     id: '2',
     imageSrc:
-      'https://lh3.googleusercontent.com/75CSmVgiCXUOCn1nJKOy7oRL4LFEhxJr1l6yLBfJ_ULj-s1JvlxXNsGbHlcU3w-ZrAz-kg9L9WLWFKl2l67AwKIGInxPuLIwzmShL594_h3Awu5Fl9g4pRpjZpvMtG6yLGCRCttlDEqaTi-d7exdkNY-rxvu9aA9REYCODOUAw9EeWgP63-PXR5BWen_5iNOqrPt_L-Rb2oMsYgRr0QCFSt5skJNmFRstVC3t492aKYN92NutVNPAhZ41mRgV7_2JaFCmOKPIIYWMuxeTgmWBRXU_M02Mx_E7cE9gMzu-tWvPGPilEwZbb9hTrcqqwfIXQFVKzzPGM-w1KejsZjpnKQsixeDAdihmoL8Roespa5iNW88A5AR6YnGqFeIyrVQNqRFTHhsRlH2kJuJgv1OndOPMUL5lq9iyfqfdsIrBI-qNSsADqgukSMF2RyY6ZckWiVl77UwoL-p38P1NhFNBKR8t-RdlqN28b5NiWjWG-NSZEOx8jwhmAPk0API30NVpuyB3oJf8Gy5kzV4gt1ClBttc-YwrFxmVs73XQ_mDfXR8SLSk6JKH5sJcU2gXHSjr847an5IC_jFUCLzRzGx48fJfSaiWZE3xI0FPTauoQrEZK2v4XoZ0mfwoeufnVfWi2c5I8Hx8jFoHuFmwOSQpAmWcs-lVgAhDwXRvJ8LufUD0P2RPPZiL_7KZxj85GYDQQUtcKAzHU2MP3qNRHzlBY9r=w977-h733-no',
-    title: 'Porto'
-  }
+      'https://www.arcam.nl/wp-content/uploads/2017/11/Jannes-Linders_6.jpg',
+    title: 'Zuidoost',
+  },
+];
+
+const mockRecentPosts = [
+  {
+    description:
+      'The most striking thing about Amsterdam is just how true the stereotypes are: The locals are tall, apple-cheeked, and good-looking as they sail past you on fixed-gear bikes; the tree-lined canals are just as picturesque as you’ve heard, and the restaurants and shops are as cozy and well priced as those practical Dutch demand.',
+    id: '1',
+    imageSrc: 'https://cdn.tourradar.com/s3/tour/750x400/84941_f45c34.jpg',
+    title: 'De Pijp',
+  },
+  {
+    description:
+      'The low-rise neighborhood Zuidoost is located in a historically charged place. In the past, there were the Egeldonk and Echtenstein honeycomb apartments that have virtually disappeared completely with the breaker. Instead of the massive concrete flats of the time, one now finds a neighborhood on a human scale. ',
+    id: '2',
+    imageSrc:
+      'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/42/0f.jpg',
+    title: 'Zuidoost',
+  },
+  {
+    description:
+      'The most striking thing about Amsterdam is just how true the stereotypes are: The locals are tall, apple-cheeked, and good-looking as they sail past you on fixed-gear bikes; the tree-lined canals are just as picturesque as you’ve heard, and the restaurants and shops are as cozy and well priced as those practical Dutch demand.',
+    id: '3',
+    imageSrc: 'http://www.reguliers.net/pictures/koningsdag.jpg',
+    title: 'De Pijp',
+  },
+  {
+    description:
+      'The low-rise neighborhood Zuidoost is located in a historically charged place. In the past, there were the Egeldonk and Echtenstein honeycomb apartments that have virtually disappeared completely with the breaker. Instead of the massive concrete flats of the time, one now finds a neighborhood on a human scale. ',
+    id: '4',
+    imageSrc:
+      'https://cache-graphicslib.viator.com/graphicslib/page-images/742x525/321877_Viator_Shutterstock_31143.jpg',
+    title: 'Zuidoost',
+  },
+  {
+    description:
+      'The most striking thing about Amsterdam is just how true the stereotypes are: The locals are tall, apple-cheeked, and good-looking as they sail past you on fixed-gear bikes; the tree-lined canals are just as picturesque as you’ve heard, and the restaurants and shops are as cozy and well priced as those practical Dutch demand.',
+    id: '5',
+    imageSrc: 'https://cdn.getyourguide.com/img/tour_img-655953-145.jpg',
+    title: 'De Pijp',
+  },
+  {
+    description:
+      'The low-rise neighborhood Zuidoost is located in a historically charged place. In the past, there were the Egeldonk and Echtenstein honeycomb apartments that have virtually disappeared completely with the breaker. Instead of the massive concrete flats of the time, one now finds a neighborhood on a human scale. ',
+    id: '6',
+    imageSrc:
+      'https://www.arcam.nl/wp-content/uploads/2017/11/Jannes-Linders_6.jpg',
+    title: 'Zuidoost',
+  },
 ];
 
 export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
-  heroImg
+  heroImg,
 }) => {
   const heroImageSrc = heroImg.childImageSharp
     ? heroImg.childImageSharp.fluid.src
@@ -38,7 +86,8 @@ export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
   return (
     <div>
       <Hero heroImageSrc={heroImageSrc} />
-      <FeaturedPosts posts={mockData} />
+      <FeaturedPosts posts={mockFeaturedPostsData} />
+      <RecentPosts posts={mockRecentPosts} />
     </div>
   );
 };
