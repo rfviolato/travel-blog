@@ -13,11 +13,11 @@ interface IHomePageTemplateProps {
 const mockFeaturedPostsData = [
   {
     description:
-      'The most striking thing about Amsterdam is just how true the stereotypes are: The locals are tall, apple-cheeked, and good-looking as they sail past you on fixed-gear bikes; the tree-lined canals are just as picturesque as you’ve heard, and the restaurants and shops are as cozy and well priced as those practical Dutch demand.',
+      'Two of The Netherland’s most iconic products in one place, Brouwerij ’t IJ is a modern beer brewery that is located next to a windmill. At the brewery you can try all of their tasty organic blonde and dark beers. It’s always lively inside and outside where people are enjoying a beer and some small bites outside at the picnic tables. And for those interested in the brewing process, on the weekends they offer tours in Dutch and English for just over the price of a beer.',
     id: '1',
     imageSrc:
-      'https://assets.vogue.com/photos/58913999736d5f2410e37356/master/w_1560,c_limit/0-holding-de-pijp-amsterdam-travel-guide.jpg',
-    title: 'De Pijp',
+      'https://otg.imgix.net/assets/grid/amsterdam/oosterpark-plantage/brouwerij-t-ij/brouwerijt-outside.jpg?auto=format%2Ccompress&crop=focalpoint&fit=min&fm=jpg&fp-x=0.5&fp-y=0.5&ixlib=php-1.1.0&q=80&w=1200&s=173a46c19faf36bbb9c69cab528dc1d3',
+    title: "Brouwerij 't ij",
   },
   {
     description:

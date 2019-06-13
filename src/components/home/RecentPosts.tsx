@@ -1,4 +1,4 @@
-/* tslint:disable:jsx-no-lambda */
+// tslint:disable: jsx-no-lambda
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 
@@ -26,15 +26,19 @@ interface IOverlayProps {
 
 const PostItemContainer = styled.div`
   position: relative;
-  width: 250px;
-  height: 250px;
+  display: flex;
+  padding: 30px 0;
   border-radius: 5px;
-  cursor: pointer;
+`;
+
+const PostItemImageWrapper = styled.div`
+  width: 100%;
+  height: 300px;
+  max-width: 500px;
 `;
 
 const PostItemBackground = styled.div<IPostItemBackgroundProps>`
-  flex: 1 1 50%;
-  width: 100%;
+  flex: 1 1 auto;
   height: 100%;
   background-position: 50% 50%;
   background-image: ${({ src }: IPostItemBackgroundProps) => `url(${src})`};
@@ -42,28 +46,17 @@ const PostItemBackground = styled.div<IPostItemBackgroundProps>`
   border-radius: 5px;
 `;
 
-const Overlay = styled.div<IOverlayProps>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  color: #fff;
+const PostItemContent = styled.div`
+  margin-left: 30px;
   text-align: left;
-  z-index: 1;
-  opacity: ${({ isActive }) => (isActive ? '1' : '0')};
-  transition: opacity 330ms cubic-bezier(0.215, 0.61, 0.355, 1);
 `;
 
-const PostTitle = styled.div`
-  font-size: 16px;
-  font-weight: 700;
+const PostTitle = styled.h4`
+  font-weight: 600;
 `;
 
 const PostDescription = styled.div`
-  font-size: 12px;
+  font-size: 19px;
   line-height: 1.4em;
   margin-top: 4px;
 `;
@@ -74,18 +67,19 @@ const RecentPost: React.SFC<IRecentPost> = ({
   description,
 }) => {
   const [isActive, setActive] = useState(false);
-  console.log({ isActive });
 
   return (
     <PostItemContainer
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     >
-      <PostItemBackground src={imageSrc} />
-      <Overlay isActive={isActive}>
+      <PostItemImageWrapper>
+        <PostItemBackground src={imageSrc} />
+      </PostItemImageWrapper>
+      <PostItemContent>
         <PostTitle>{title}</PostTitle>
         <PostDescription>{description}</PostDescription>
-      </Overlay>
+      </PostItemContent>
     </PostItemContainer>
   );
 };
@@ -98,18 +92,15 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Title = styled.div`
-  font-size: 32px;
+const Title = styled.h2`
   font-weight: 700;
 `;
 
 const Description = styled.div`
   font-size: 14px;
-  margin-top: 8px;
 `;
 
-const PostListWrapper = styled.div`
-  display: flex;
+const ListWrapper = styled.div`
   margin-top: 30px;
 
   &:last-child {
@@ -118,34 +109,24 @@ const PostListWrapper = styled.div`
 `;
 
 const PostItemWrapper = styled.div`
-  margin-right: 12px;
-
-  &:nth-child(4n) {
-    margin-right: 0;
-  }
+  margin-top: 12px;
+  border-bottom: 1px solid #bebebe;
 `;
 
 const RecentPosts: React.SFC<IRecentPostsProps> = ({ posts }) => {
   return (
     <Container>
-      <Title>Popular Posts</Title>
+      <Title>Recent Posts</Title>
       <Description>
         Check it out our latest hot tips of this awesome city!
       </Description>
-      <PostListWrapper>
-        {posts.slice(0, 3).map(({ id, ...post }) => (
+      <ListWrapper>
+        {posts.map(({ id, ...post }) => (
           <PostItemWrapper key={id}>
             <RecentPost {...post} />
           </PostItemWrapper>
         ))}
-      </PostListWrapper>
-      <PostListWrapper>
-        {posts.slice(3, 6).map(({ id, ...post }) => (
-          <PostItemWrapper key={id}>
-            <RecentPost {...post} />
-          </PostItemWrapper>
-        ))}
-      </PostListWrapper>
+      </ListWrapper>
     </Container>
   );
 };

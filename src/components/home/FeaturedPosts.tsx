@@ -22,6 +22,8 @@ interface IFeaturedPostImageProps {
 const FeaturedPostContainer = styled.div`
   display: flex;
   flex-flow: row;
+  height: 30vw;
+  max-height: 500px;
 
   &:nth-child(even) {
     flex-flow: row-reverse;
@@ -29,7 +31,7 @@ const FeaturedPostContainer = styled.div`
 `;
 
 const FeaturedPostInfo = styled.div`
-  padding: 80px 20px 20px;
+  padding: 20px;
   background-color: #eee;
   flex: 1 1 50%;
 `;
@@ -37,7 +39,7 @@ const FeaturedPostInfo = styled.div`
 const FeaturedPostImage = styled.div<IFeaturedPostImageProps>`
   flex: 1 1 50%;
   width: 100%;
-  height: 400px;
+  height: 100%;
   background-position: 50% 50%;
   background-image: ${({ src }: IFeaturedPostImageProps) => `url(${src})`};
   background-size: cover;
@@ -49,7 +51,7 @@ const FeaturedPostInfoTitle = styled.div`
 `;
 
 const FeaturedPostInfoDescription = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 12px;
 `;
 
