@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar.tsx';
 import './all.sass';
 import useSiteMetadata from './SiteMetadata';
 import GlobalStyles from './style/GlobalStyles';

@@ -12,7 +12,7 @@ interface IHeroImageProps {
 const Container = styled.div<IHeroImageProps>`
   width: 100%;
   height: 100vh;
-  background-position: 50% 50%;
+  background-position: 50% 10%;
   background-image: ${({ src }: IHeroImageProps) => `url(${src})`};
 `;
 

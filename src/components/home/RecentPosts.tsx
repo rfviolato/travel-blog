@@ -111,6 +111,10 @@ const ListWrapper = styled.div`
 const PostItemWrapper = styled.div`
   margin-top: 12px;
   border-bottom: 1px solid #bebebe;
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const RecentPosts: React.SFC<IRecentPostsProps> = ({ posts }) => {
