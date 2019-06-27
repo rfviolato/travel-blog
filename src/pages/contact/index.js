@@ -1,26 +1,26 @@
-import React from 'react'
-import { navigate } from 'gatsby-link'
-import Layout from '../../components/Layout'
+import React from 'react';
+import { navigate } from 'gatsby-link';
+import Layout from '../../components/Layout.tsx';
 
 function encode(data) {
   return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
 }
 
 export default class Index extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { isValidated: false }
+    super(props);
+    this.state = { isValidated: false };
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const form = e.target
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -30,8 +30,8 @@ export default class Index extends React.Component {
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
-      .catch(error => alert(error))
-  }
+      .catch((error) => alert(error));
+  };
 
   render() {
     return (
@@ -110,6 +110,6 @@ export default class Index extends React.Component {
           </div>
         </section>
       </Layout>
-    )
+    );
   }
 }

@@ -37,7 +37,7 @@ const Link = styled(GatsbyLink)`
   opacity: 1;
 
   &:hover {
-    color: #dfdfdf; /* FIXME: Once bulma globals are overriden/removed, erase this line. */
+    color: #dfdfdf; /* TODO: Once bulma globals are overriden/removed, erase this line. */
     opacity: 0.7;
   }
 `;

@@ -1,12 +1,26 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar.tsx';
-import './all.sass';
+import React, { ReactNode } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from './Footer';
 import useSiteMetadata from './SiteMetadata';
 import GlobalStyles from './style/GlobalStyles';
+import Helmet from 'react-helmet';
+import styled from '@emotion/styled';
+import './all.sass';
 
-const TemplateWrapper = ({ children }) => {
+// TODO: Abstract the values below to their owner's files.
+const FOOTER_HEIGHT = '482px';
+const NAVBAR_HEIGHT = '95px';
+
+const ChildrenWrapper = styled.div`
+  padding-top: ${NAVBAR_HEIGHT};
+  min-height: calc(100vh - ${FOOTER_HEIGHT});
+`;
+
+interface ITemplateWrapperProps {
+  children: ReactNode;
+}
+
+const TemplateWrapper: React.SFC<ITemplateWrapperProps> = ({ children }) => {
   const { title, description } = useSiteMetadata();
   return (
     <div>
@@ -47,7 +61,7 @@ const TemplateWrapper = ({ children }) => {
       </Helmet>
       <GlobalStyles />
       <Navbar />
-      <div>{children}</div>
+      <ChildrenWrapper>{children}</ChildrenWrapper>
       <Footer />
     </div>
   );

@@ -2,6 +2,10 @@ import { css, Global } from '@emotion/core';
 import React from 'react';
 
 const styles = css`
+  body {
+    font-family: 'Quicksand';
+  }
+
   h1 {
     font-size: 64px;
   }

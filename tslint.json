@@ -5,7 +5,8 @@
   "rules": {
     "interface-name": false,
     "member-access": [false],
-    "ordered-imports": [true],
+    "ordered-imports": [false],
+    "object-literal-sort-keys": [false],
     "no-console": [false],
     "no-var-requires": true,
     "quotemark": [true, "single", "jsx-double"]
