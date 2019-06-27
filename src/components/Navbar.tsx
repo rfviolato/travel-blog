@@ -13,7 +13,7 @@ const Container = styled.header`
   height: 95px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   background-color: rgba(0, 0, 0, 0.325);
-  padding: 0 7.5%;
+  padding: 0 10vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,7 +30,7 @@ const LinksWrapper = styled.nav`
 const Link = styled(GatsbyLink)`
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 18px;
   color: #dfdfdf;
   margin-right: 15px;
   transition: opacity 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -46,13 +46,13 @@ const Navbar: React.SFC = () => {
   return (
     <Container>
       <Link to="/" title="Logo">
-        <Logo src={logo} alt="Kaldi" />
+        <Logo src={logo} alt="Logo" />
       </Link>
       <LinksWrapper>
         <Link to="/about">About</Link>
         <Link to="/blog">Blog</Link>
         <Link to="/contact">Contact</Link>
-        <Link to="/contact/examples">Form Examples</Link>
+        <Link to="/contact/examples">Book Tickets</Link>
       </LinksWrapper>
     </Container>
   );
