@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { Link as GatsbyLink } from 'gatsby';
 
 interface INavbarProps {
-  isSolid: boolean | undefined;
+  isSolid?: boolean;
 }
 
 const Container = styled.header`
