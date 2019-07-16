@@ -1,8 +1,13 @@
 // tslint:disable: no-var-requires
 import React from 'react';
 const logo = require('./../img/logo.svg');
+import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Link as GatsbyLink } from 'gatsby';
+
+interface INavbarProps {
+  isSolid: boolean | undefined;
+}
 
 const Container = styled.header`
   position: absolute;
@@ -17,6 +22,11 @@ const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+const solidContainerStyle = css`
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgba(0, 0, 0, 0.15);
 `;
 
 const Logo = styled.img`
@@ -41,18 +51,33 @@ const Link = styled(GatsbyLink)`
     opacity: 0.7;
   }
 `;
+const solidContainerLinkStyle = css`
+  color: #484848;
 
-const Navbar: React.SFC = () => {
+  &:hover {
+    color: #484848; /* TODO: Once bulma globals are overriden/removed, erase this line. */
+  }
+`;
+
+const Navbar: React.SFC<INavbarProps> = ({ isSolid }) => {
   return (
-    <Container>
+    <Container css={isSolid && solidContainerStyle}>
       <Link to="/" title="Logo">
         <Logo src={logo} alt="Logo" />
       </Link>
       <LinksWrapper>
-        <Link to="/about">About</Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/contact/examples">Book Tickets</Link>
+        <Link css={isSolid && solidContainerLinkStyle} to="/about">
+          About
+        </Link>
+        <Link css={isSolid && solidContainerLinkStyle} to="/blog">
+          Blog
+        </Link>
+        <Link css={isSolid && solidContainerLinkStyle} to="/contact">
+          Contact
+        </Link>
+        <Link css={isSolid && solidContainerLinkStyle} to="/contact/examples">
+          Book Tickets
+        </Link>
       </LinksWrapper>
     </Container>
   );

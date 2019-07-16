@@ -95,7 +95,7 @@ export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
   );
 };
 
-const IndexPage = ({ data }: IHeroQueryData) => {
+const IndexPage: React.SFC<IHeroQueryData> = ({ data }) => {
   const { image } = data.markdownRemark.frontmatter;
 
   return (

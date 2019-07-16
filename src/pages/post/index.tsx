@@ -14,7 +14,7 @@ const post = {
 
 const PostPage: React.SFC = () => {
   return (
-    <Layout>
+    <Layout solidHeader={true}>
       <PostTemplate post={post} />
     </Layout>
   );

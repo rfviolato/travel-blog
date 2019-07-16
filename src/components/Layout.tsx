@@ -9,21 +9,24 @@ import './all.sass';
 
 // TODO: Abstract the values below to their owner's files.
 const FOOTER_HEIGHT = '482px';
-const NAVBAR_HEIGHT = '95px';
 
 const ChildrenWrapper = styled.div`
-  padding-top: ${NAVBAR_HEIGHT};
   min-height: calc(100vh - ${FOOTER_HEIGHT});
 `;
 
 interface ITemplateWrapperProps {
   children: ReactNode;
+  solidHeader?: boolean;
 }
 
-const TemplateWrapper: React.SFC<ITemplateWrapperProps> = ({ children }) => {
+const TemplateWrapper: React.SFC<ITemplateWrapperProps> = ({
+  children,
+  solidHeader,
+}) => {
   const { title, description } = useSiteMetadata();
+
   return (
-    <div>
+    <React.Fragment>
       <Helmet>
         <html lang="en" />
         <title>{title}</title>
@@ -60,10 +63,11 @@ const TemplateWrapper: React.SFC<ITemplateWrapperProps> = ({ children }) => {
         <meta property="og:image" content="/img/og-image.jpg" />
       </Helmet>
       <GlobalStyles />
-      <Navbar />
+
+      <Navbar isSolid={solidHeader} />
       <ChildrenWrapper>{children}</ChildrenWrapper>
       <Footer />
-    </div>
+    </React.Fragment>
   );
 };
 
