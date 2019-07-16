@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faTags } from '@fortawesome/pro-light-svg-icons';
+import Blockquote from './../components/post/Blockquote';
 
 interface IPostProps {
   id: string;
@@ -89,6 +90,9 @@ const DummyContent: React.SFC<IDummyContentProps> = ({ children }) => {
       </Paragraph>
       <Paragraph>
         {children}
+        <Blockquote>
+          Something really important about this post is quoted here
+        </Blockquote>
         {children}
       </Paragraph>
       <Paragraph>{children}</Paragraph>
