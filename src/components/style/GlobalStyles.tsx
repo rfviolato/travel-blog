@@ -29,6 +29,13 @@ const styles = css`
   h6 {
     font-size: 12px;
   }
+
+  button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+  }
 `;
 
 const GlobalStyles: React.SFC = () => <Global styles={styles} />;

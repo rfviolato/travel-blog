@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faTags } from '@fortawesome/pro-light-svg-icons';
-import { Blockquote, Image } from './../components/post';
+import { Blockquote, Image, SharePostButtons } from './../components/post';
 
 interface IPostProps {
   id: string;
@@ -65,7 +65,7 @@ const MetadataInfo = styled.div`
   align-items: center;
   font-size: 14px;
 
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: 28px;
   }
 `;
@@ -73,6 +73,10 @@ const MetadataInfo = styled.div`
 const MetadataInfoText = styled.div`
   margin-left: 7px;
   transform: translateY(1px);
+`;
+
+const SharePostButtonsWrapper = styled.div`
+  margin-top: 60px;
 `;
 
 interface IDummyContentProps {
@@ -162,6 +166,9 @@ const PostPage: React.SFC<IPostPageProps> = ({ post }) => {
           <DummyContent>{post.content}</DummyContent>
         </ContentWrapper>
       </PostContent>
+      <SharePostButtonsWrapper>
+        <SharePostButtons />
+      </SharePostButtonsWrapper>
     </Container>
   );
 };

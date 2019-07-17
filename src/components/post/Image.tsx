@@ -37,19 +37,6 @@ const Caption = styled.figcaption`
   margin-left: 5px;
 `;
 
-const getImageModeStyle = (mode: IImageProps['mode']) => {
-  switch (mode) {
-    case Image.options.right:
-      return rightOptionStyle;
-
-    case Image.options.full:
-      return fullOptionStyle;
-
-    default:
-      return leftOptionStyle;
-  }
-};
-
 class Image extends Component<IImageProps> {
   static options = {
     left: 'LEFT',
@@ -57,11 +44,24 @@ class Image extends Component<IImageProps> {
     full: 'FULL',
   };
 
+  getImageModeStyle(mode: IImageProps['mode']) {
+    switch (mode) {
+      case Image.options.right:
+        return rightOptionStyle;
+
+      case Image.options.full:
+        return fullOptionStyle;
+
+      default:
+        return leftOptionStyle;
+    }
+  }
+
   render() {
     const { caption, src, mode } = this.props;
 
     return (
-      <figure css={getImageModeStyle(mode)}>
+      <figure css={this.getImageModeStyle(mode)}>
         <Img src={src} /> {/* TODO: Use gatsby image once this is dynamic */}
         {caption && <Caption>{caption}</Caption>}
       </figure>
