@@ -7,6 +7,7 @@ interface IBlockquoteProps {
 
 const Container = styled.blockquote`
   margin: 0; /* Overrides browser default */
+  display: table; /* Fixes problem with images floating left next to blockquote */
   padding: 10px 0;
   margin: 1em 0;
   padding-left: 12px;
