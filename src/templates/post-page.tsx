@@ -2,7 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faTags } from '@fortawesome/pro-light-svg-icons';
-import { Blockquote, Image, SharePostButtons } from './../components/post';
+import {
+  Blockquote,
+  Image,
+  SharePostButtons,
+  PostAuthor,
+} from './../components/post';
 
 interface IPostProps {
   id: string;
@@ -79,6 +84,10 @@ const SharePostButtonsWrapper = styled.div`
   margin-top: 60px;
 `;
 
+const PostAuthorWrapper = styled.div`
+  margin-top: 40px;
+`;
+
 interface IDummyContentProps {
   children: string;
 }
@@ -97,6 +106,15 @@ const DummyContent: React.SFC<IDummyContentProps> = ({ children }) => {
         catch a movie or see an exhibition about cinematic history. The EYE’s
         waterside terrace also offers an amazing view across the IJ, where you
         can watch the boats and ships go by.
+      </Paragraph>
+      <Paragraph>
+        Start your day by renting a bike from Macbike Central Station (discount
+        with your I amsterdam City Card) and taking a short ferry ride across
+        the IJ River (GVB ferry 901/902, behind Amsterdam Central Station, free)
+        to Noordelijke IJ oever, a hip area full of art galleries, interesting
+        architecture, and great waterside terraces. Check out the EYE Filmmuseum
+        (free with your I amsterdam City Card), to catch a movie or see an
+        exhibition about cinematic history.
       </Paragraph>
       <Image
         src="https://images.unsplash.com/photo-1458242462449-7b6697b7caef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80"
@@ -166,9 +184,14 @@ const PostPage: React.SFC<IPostPageProps> = ({ post }) => {
           <DummyContent>{post.content}</DummyContent>
         </ContentWrapper>
       </PostContent>
+
       <SharePostButtonsWrapper>
         <SharePostButtons />
       </SharePostButtonsWrapper>
+
+      <PostAuthorWrapper>
+        <PostAuthor />
+      </PostAuthorWrapper>
     </Container>
   );
 };

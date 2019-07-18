@@ -51,7 +51,7 @@ const Link = styled(GatsbyLink)`
     opacity: 0.7;
   }
 `;
-const solidContainerLinkStyle = css`
+const solidLinkStyle = css`
   color: #484848;
 
   &:hover {
@@ -66,16 +66,16 @@ const Navbar: React.SFC<INavbarProps> = ({ isSolid }) => {
         <Logo src={logo} alt="Logo" />
       </Link>
       <LinksWrapper>
-        <Link css={isSolid && solidContainerLinkStyle} to="/about">
+        <Link css={isSolid && solidLinkStyle} to="/about">
           About
         </Link>
-        <Link css={isSolid && solidContainerLinkStyle} to="/blog">
+        <Link css={isSolid && solidLinkStyle} to="/blog">
           Blog
         </Link>
-        <Link css={isSolid && solidContainerLinkStyle} to="/contact">
+        <Link css={isSolid && solidLinkStyle} to="/contact">
           Contact
         </Link>
-        <Link css={isSolid && solidContainerLinkStyle} to="/contact/examples">
+        <Link css={isSolid && solidLinkStyle} to="/contact/examples">
           Book Tickets
         </Link>
       </LinksWrapper>
