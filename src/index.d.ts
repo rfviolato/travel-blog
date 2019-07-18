@@ -1,3 +1,7 @@
+interface IDetaultTheme {
+  primaryColor: string;
+}
+
 interface IGastbyImage {
   childImageSharp: {
     fluid: {
@@ -5,7 +9,6 @@ interface IGastbyImage {
     };
   };
 }
-
 interface IGastbyQueryData<TFrontmatter> {
   data: {
     markdownRemark: {

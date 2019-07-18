@@ -1,7 +1,16 @@
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
+import { withTheme } from 'emotion-theming';
 
 const AVATAR_SIZE = '80px';
+
+interface IPostAuthorProps {
+  theme: IDetaultTheme;
+}
+
+interface INameProps {
+  color: string;
+}
 
 const Container = styled.div`
   display: flex;
@@ -22,9 +31,9 @@ const Info = styled.div`
   margin-left: 20px;
 `;
 
-const Name = styled.div`
+const Name = styled.div<INameProps>`
   font-size: 20px;
-  color: #ff4400;
+  color: ${({ color }) => color};
   font-weight: 700;
 `;
 
@@ -33,7 +42,7 @@ const Bio = styled.div`
   font-size: 14px;
 `;
 
-const PostAuthor: React.SFC = () => (
+const PostAuthor: React.SFC<IPostAuthorProps> = ({ theme }) => (
   <Container>
     <Avatar>
       <AvatarImage
@@ -45,7 +54,7 @@ const PostAuthor: React.SFC = () => (
     </Avatar>
 
     <Info>
-      <Name>Rebeca Fiamozzini</Name>
+      <Name color={theme.primaryColor}>Rebeca Fiamozzini</Name>
       <Bio>
         Olar! Sou a Rebeca, casada com o incrível Rafael, mãe do Ted e Barney{' '}
         <span>😻</span>, fã de Sandy e Júnior e amo tomar um bom Aperol Spritz.
@@ -57,4 +66,4 @@ const PostAuthor: React.SFC = () => (
   </Container>
 );
 
-export default PostAuthor;
+export default withTheme(PostAuthor);
