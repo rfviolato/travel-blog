@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/pro-light-svg-icons';
 
 interface IAllPostsProps {
   posts: IAllPostsListItem[];
@@ -16,10 +18,59 @@ interface IAllPostsListItem extends IPostProps {
   id: string;
 }
 
-const PostContainer = styled.div`
+const HOVER_TRANSITION_OPTIONS = '300ms ease';
+
+const Overlay = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 50px;
+  opacity: 0;
+  transition: opacity ${HOVER_TRANSITION_OPTIONS};
+`;
+
+const OverlayIcon = styled.i`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: inherit;
+  transform: rotate(-6deg) scale(0.97);
+  transition: transform ${HOVER_TRANSITION_OPTIONS};
+`;
+
+const PostContainer = styled.a`
+  position: relative;
+  display: block;
+  color: inherit;
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: transform ${HOVER_TRANSITION_OPTIONS};
+
+  &:hover {
+    transform: scale(1.025);
+  }
+
+  &:hover ${Overlay} {
+    opacity: 1;
+  }
+
+  &:hover ${OverlayIcon} {
+    transform: rotate(0) scale(1);
+  }
 `;
 
 const Image = styled.img`
@@ -69,6 +120,11 @@ const Post: React.SFC<IPostProps> = ({ title, description, imageSrc }) => {
         </div>
         <Date>June 27th, 2019</Date>
       </ContentWrapper>
+      <Overlay>
+        <OverlayIcon>
+          <FontAwesomeIcon icon={faEye} />
+        </OverlayIcon>
+      </Overlay>
     </PostContainer>
   );
 };
@@ -83,26 +139,11 @@ const Container = styled.div`
   margin-top: 20px;
 `;
 
-const PostWrapper = styled.div`
-  /* width: calc(100% / 3);
-  padding-right: 30px;
-
-  &:nth-of-type(3n) {
-    padding-right: 0;
-  }
-
-  &:nth-of-type(n + 4) {
-    margin-top: 30px;
-  } */
-`;
-
 const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
   return (
     <Container>
       {posts.map((post) => (
-        <PostWrapper key={post.id}>
-          <Post {...post} />
-        </PostWrapper>
+        <Post key={post.id} {...post} />
       ))}
     </Container>
   );
