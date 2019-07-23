@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import moment from 'moment';
 
 interface IAllPostsProps {
   posts: IAllPostsListItem[];
@@ -17,7 +16,11 @@ interface IAllPostsListItem extends IPostProps {
   id: string;
 }
 
-const PostContainer = styled.div``;
+const PostContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
 const Image = styled.img`
   display: block;
@@ -27,8 +30,12 @@ const Image = styled.img`
   border-top-right-radius: 4px;
 `;
 
-const Content = styled.div`
-  padding: 0 15px 15px;
+const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
   border-style: solid;
   border-width: 1px;
   border-color: #ccc;
@@ -38,6 +45,7 @@ const Content = styled.div`
 `;
 
 const ContentPreview = styled.div`
+  flex-direction: column;
   margin-top: 5px;
   font-size: 15px;
   line-height: 1.25em;
@@ -54,32 +62,38 @@ const Post: React.SFC<IPostProps> = ({ title, description, imageSrc }) => {
   return (
     <PostContainer>
       <Image src={imageSrc} />
-      <Content>
-        <h3>{title}</h3>
-        <ContentPreview>{description}</ContentPreview>
+      <ContentWrapper>
+        <div>
+          <h3>{title}</h3>
+          <ContentPreview>{description}</ContentPreview>
+        </div>
         <Date>June 27th, 2019</Date>
-      </Content>
+      </ContentWrapper>
     </PostContainer>
   );
 };
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr [col]);
+  grid-template-rows: auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  align-items: stretch;
   margin-top: 20px;
 `;
 
 const PostWrapper = styled.div`
-  flex: 1 1 33%;
+  /* width: calc(100% / 3);
   padding-right: 30px;
 
-  &:nth-child(3n) {
+  &:nth-of-type(3n) {
     padding-right: 0;
   }
 
-  &:nth-child(n + 4) {
+  &:nth-of-type(n + 4) {
     margin-top: 30px;
-  }
+  } */
 `;
 
 const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
