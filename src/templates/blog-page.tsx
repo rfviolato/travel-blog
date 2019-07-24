@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { AllPosts } from './../components/blog';
+import Center from './../components/Center';
 
 const mockPosts = [
   {
@@ -56,26 +57,20 @@ const mockPosts = [
   },
 ];
 
-const Container = styled.div`
-  padding-bottom: 80px;
-  width: 80vw;
-  margin: 0 auto;
-`;
-
 const Title = styled.h1`
   text-align: center;
 `;
 
 const BlogTemplate: React.SFC = () => {
   return (
-    <Container>
+    <article className="center">
       <div>
         <Title>All posts</Title>
       </div>
       <div>
         <AllPosts posts={mockPosts} />
       </div>
-    </Container>
+    </article>
   );
 };
 

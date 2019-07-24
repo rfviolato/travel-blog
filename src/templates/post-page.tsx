@@ -25,12 +25,6 @@ interface IHeroImageProps {
   src: string;
 }
 
-const Container = styled.article`
-  padding-bottom: 80px;
-  width: 80vw;
-  margin: 0 auto;
-`;
-
 const HeroImage = styled.div<IHeroImageProps>`
   width: 100%;
   height: 550px;
@@ -163,7 +157,7 @@ const DummyContent: React.SFC<IDummyContentProps> = ({ children }) => {
 
 const PostPage: React.SFC<IPostPageProps> = ({ post }) => {
   return (
-    <Container>
+    <article className="center">
       <PostContent>
         <HeroImage src={post.imageUrl} />
 
@@ -192,7 +186,7 @@ const PostPage: React.SFC<IPostPageProps> = ({ post }) => {
       <PostAuthorWrapper>
         <PostAuthor />
       </PostAuthorWrapper>
-    </Container>
+    </article>
   );
 };
 

@@ -36,6 +36,13 @@ const styles = css`
     padding: 0;
     background-color: inherit;
   }
+
+  .center {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    max-width: 1400px;
+  }
 `;
 
 const GlobalStyles: React.SFC = () => <Global styles={styles} />;
