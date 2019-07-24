@@ -24,21 +24,38 @@ interface IOverlayProps {
   isActive: boolean;
 }
 
+const MEDIA_QUERY_SIZES = {
+  LARGE: '760px',
+  MEDIUM: '500px',
+};
+
 const PostItemContainer = styled.div`
   position: relative;
   display: flex;
   padding: 30px 0;
   border-radius: 5px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+    flex-direction: column;
+  }
 `;
 
 const PostItemImageWrapper = styled.div`
-  width: 100%;
-  height: 300px;
+  flex: 1;
   max-width: 500px;
+  height: 300px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.LARGE}) {
+    max-width: 30vw;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+    max-width: initial;
+  }
 `;
 
 const PostItemBackground = styled.div<IPostItemBackgroundProps>`
-  flex: 1 1 auto;
+  flex: 1;
   height: 100%;
   background-position: 50% 50%;
   background-image: ${({ src }: IPostItemBackgroundProps) => `url(${src})`};
@@ -47,8 +64,14 @@ const PostItemBackground = styled.div<IPostItemBackgroundProps>`
 `;
 
 const PostItemContent = styled.div`
+  flex: 1;
   margin-left: 30px;
   text-align: left;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 `;
 
 const PostTitle = styled.h4`

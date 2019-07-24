@@ -2,7 +2,6 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { FeaturedPosts, Hero, RecentPosts } from '../components/home/index';
 import Layout from '../components/Layout';
-import { LayoutCenteredContent } from './../components/style';
 
 type IHeroQueryData = IGastbyQueryData<{ image: IGastbyImage }>;
 
@@ -88,9 +87,9 @@ export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
     <div>
       <Hero heroImageSrc={heroImageSrc} />
       <FeaturedPosts posts={mockFeaturedPostsData} />
-      <LayoutCenteredContent>
+      <div className="center">
         <RecentPosts posts={mockRecentPosts} />
-      </LayoutCenteredContent>
+      </div>
     </div>
   );
 };
