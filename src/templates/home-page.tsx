@@ -94,6 +94,7 @@ export const HomePageTemplate: React.SFC<IHomePageTemplateProps> = ({
   );
 };
 
+// TODO: Shouldn't the below be at `pages` folder?
 const IndexPage: React.SFC<IHeroQueryData> = ({ data }) => {
   const { image } = data.markdownRemark.frontmatter;
 

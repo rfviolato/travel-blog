@@ -12,8 +12,12 @@ interface IHeroImageProps {
 const Container = styled.div<IHeroImageProps>`
   width: 100%;
   height: 100vh;
-  background-position: 50% 10%;
+  background-position: 50% -60vh;
   background-image: ${({ src }) => `url(${src})`};
+
+  @media (min-height: 800px) {
+    background-position: 50% 40%;
+  }
 `;
 
 const Hero: React.SFC<IHeroProps> = ({ heroImageSrc }) => (
