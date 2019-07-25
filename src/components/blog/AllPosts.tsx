@@ -18,7 +18,14 @@ interface IAllPostsListItem extends IPostProps {
   id: string;
 }
 
+const MEDIA_QUERY_SIZES = {
+  L: '1060px',
+  M: '768px',
+  S: '660px',
+};
+
 const HOVER_TRANSITION_OPTIONS = '300ms ease';
+const BORDER_RADIUS = '4px';
 
 const Overlay = styled.div`
   position: absolute;
@@ -35,6 +42,11 @@ const Overlay = styled.div`
   font-size: 50px;
   opacity: 0;
   transition: opacity ${HOVER_TRANSITION_OPTIONS};
+  border-radius: ${BORDER_RADIUS};
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    display: none;
+  }
 `;
 
 const OverlayIcon = styled.i`
@@ -52,11 +64,9 @@ const OverlayIcon = styled.i`
 `;
 
 const PostContainer = styled.a`
-  position: relative;
-  display: block;
-  color: inherit;
-  height: 100%;
   display: flex;
+  position: relative;
+  color: inherit;
   flex-direction: column;
   transition: transform ${HOVER_TRANSITION_OPTIONS};
 
@@ -71,19 +81,37 @@ const PostContainer = styled.a`
   &:hover ${OverlayIcon} {
     transform: rotate(0) scale(1);
   }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.S}) {
+    &:hover {
+      transform: scale(1);
+    }
+  }
 `;
 
 const Image = styled.img`
   display: block;
   width: 100%;
-  height: 15vw;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  height: 21vw;
+  border-top-left-radius: ${BORDER_RADIUS};
+  border-top-right-radius: ${BORDER_RADIUS};
+
+  @media (min-width: 1400px) {
+    height: 300px;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    height: 30vw;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.S}) {
+    height: 45vw;
+  }
 `;
 
-const ContentWrapper = styled.div`
-  flex: 1;
+const PostContentWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
@@ -91,11 +119,11 @@ const ContentWrapper = styled.div`
   border-width: 1px;
   border-color: #ccc;
   border-top: 0;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: ${BORDER_RADIUS};
+  border-bottom-right-radius: ${BORDER_RADIUS};
 `;
 
-const ContentPreview = styled.div`
+const PostContentPreview = styled.div`
   flex-direction: column;
   margin-top: 5px;
   font-size: 15px;
@@ -113,13 +141,13 @@ const Post: React.SFC<IPostProps> = ({ title, description, imageSrc }) => {
   return (
     <PostContainer>
       <Image src={imageSrc} />
-      <ContentWrapper>
+      <PostContentWrapper>
         <div>
           <h3>{title}</h3>
-          <ContentPreview>{description}</ContentPreview>
+          <PostContentPreview>{description}</PostContentPreview>
         </div>
         <Date>June 27th, 2019</Date>
-      </ContentWrapper>
+      </PostContentWrapper>
       <Overlay>
         <OverlayIcon>
           <FontAwesomeIcon icon={faEye} />
@@ -135,8 +163,16 @@ const Container = styled.div`
   grid-template-rows: auto;
   grid-column-gap: 30px;
   grid-row-gap: 30px;
-  align-items: stretch;
   margin-top: 20px;
+  margin-bottom: 80px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    grid-template-columns: repeat(2, 1fr [col]);
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.S}) {
+    grid-template-columns: repeat(1, 1fr [col]);
+  }
 `;
 
 const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
