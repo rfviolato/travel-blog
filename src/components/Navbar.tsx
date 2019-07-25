@@ -1,7 +1,7 @@
 // tslint:disable: no-var-requires
 import React from 'react';
 const logo = require('./../img/logo.svg');
-import { css, jsx } from '@emotion/core';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Link as GatsbyLink } from 'gatsby';
 

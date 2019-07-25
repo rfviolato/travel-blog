@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import React from 'react';
 
 interface IFeaturedPost {
@@ -19,14 +20,41 @@ interface IFeaturedPostImageProps {
   src: string;
 }
 
+const MEDIA_QUERY_SIZES = {
+  XXL: '1300px',
+  XL: '1100px',
+  L: '900px',
+  M: '600px',
+};
+
 const FeaturedPostContainer = styled.div`
   display: flex;
-  flex-flow: row;
   height: 30vw;
-  max-height: 500px;
 
-  &:nth-child(even) {
-    flex-flow: row-reverse;
+  &:nth-of-type(even) {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.XXL}) {
+    height: 45vw;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.XL}) {
+    height: 60vw;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    height: 75vw;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    height: auto;
+    flex-direction: column;
+
+    &:nth-of-type(even) {
+      margin-top: 3px;
+      flex-direction: column-reverse;
+    }
   }
 `;
 
@@ -34,15 +62,23 @@ const FeaturedPostInfo = styled.div`
   padding: 20px;
   background-color: #eee;
   flex: 1 1 50%;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    flex: 1 1 auto;
+  }
 `;
 
 const FeaturedPostImage = styled.div<IFeaturedPostImageProps>`
   flex: 1 1 50%;
-  width: 100%;
   height: 100%;
   background-position: 50% 50%;
   background-image: ${({ src }: IFeaturedPostImageProps) => `url(${src})`};
   background-size: cover;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    flex: 0 0 auto;
+    height: 300px;
+  }
 `;
 
 const FeaturedPostInfoTitle = styled.div`
@@ -68,11 +104,6 @@ const FeaturedPost: React.SFC<IFeaturedPost> = ({
     <FeaturedPostImage src={imageSrc} />
   </FeaturedPostContainer>
 );
-
-const FeaturedPostWrapper = styled.div`
-  display: flex;
-  flex-flow: row;
-`;
 
 const FeaturedPosts: React.SFC<IFeaturedPostProps> = ({ posts }) => {
   return (

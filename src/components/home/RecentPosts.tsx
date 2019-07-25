@@ -25,8 +25,8 @@ interface IOverlayProps {
 }
 
 const MEDIA_QUERY_SIZES = {
-  LARGE: '760px',
-  MEDIUM: '500px',
+  L: '760px',
+  M: '500px',
 };
 
 const PostItemContainer = styled.div`
@@ -35,7 +35,7 @@ const PostItemContainer = styled.div`
   padding: 30px 0;
   border-radius: 5px;
 
-  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
     flex-direction: column;
   }
 `;
@@ -45,11 +45,11 @@ const PostItemImageWrapper = styled.div`
   max-width: 500px;
   height: 300px;
 
-  @media (max-width: ${MEDIA_QUERY_SIZES.LARGE}) {
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
     max-width: 30vw;
   }
 
-  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
     max-width: initial;
   }
 `;
@@ -68,7 +68,7 @@ const PostItemContent = styled.div`
   margin-left: 30px;
   text-align: left;
 
-  @media (max-width: ${MEDIA_QUERY_SIZES.MEDIUM}) {
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
     margin-left: 0;
     margin-top: 20px;
   }
