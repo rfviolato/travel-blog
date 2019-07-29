@@ -5,6 +5,10 @@ interface IBlockquoteProps {
   children: ReactNode;
 }
 
+const MEDIA_QUERY_SIZES = {
+  XL: '1000px',
+};
+
 const Container = styled.blockquote`
   margin: 0; /* Overrides browser default */
   display: table; /* Fixes problem with images floating left next to blockquote */
@@ -14,6 +18,10 @@ const Container = styled.blockquote`
   border-left-width: 3px;
   border-left-color: teal;
   border-left-style: solid;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.XL}) {
+    display: block;
+  }
 `;
 
 const Text = styled.span`

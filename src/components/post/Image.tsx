@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import { css, jsx, CSSObject } from '@emotion/core';
+import { css } from '@emotion/core';
 
 interface IImageProps {
   caption?: string;
@@ -8,16 +8,30 @@ interface IImageProps {
   mode?: string;
 }
 
+const MEDIA_QUERY_SIZES = {
+  L: '800px',
+};
+
 const rightOptionStyle = css`
   float: right;
   margin-bottom: 15px;
   margin-left: 15px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    float: initial;
+    margin-left: 0;
+  }
 `;
 
 const leftOptionStyle = css`
   float: left;
   margin-bottom: 15px;
   margin-right: 15px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    float: initial;
+    margin-right: 0;
+  }
 `;
 
 const fullOptionStyle = css`
@@ -29,6 +43,11 @@ const Img = styled.img`
   width: 500px;
   height: 350px;
   border-radius: 2px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.L}) {
+    width: 100%;
+    height: 60vw;
+  }
 `;
 
 const Caption = styled.figcaption`

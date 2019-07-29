@@ -25,6 +25,10 @@ interface IHeroImageProps {
   src: string;
 }
 
+const MEDIA_QUERY_SIZES = {
+  M: '600px',
+};
+
 const HeroImage = styled.div<IHeroImageProps>`
   width: 100%;
   height: 550px;
@@ -35,10 +39,19 @@ const HeroImage = styled.div<IHeroImageProps>`
 `;
 
 const Title = styled.h1`
-  margin-top: 30px;
+  margin-top: 10px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    margin-top: 17px;
+    font-size: 40px;
+    margin-bottom: 10px;
+    line-height: 1em;
+  }
 `;
 
-const PostContent = styled.section``;
+const Container = styled.article`
+  margin-bottom: 80px;
+`;
 
 const ContentWrapper = styled.div`
   margin-top: 30px;
@@ -57,6 +70,11 @@ const Metadata = styled.div`
   opacity: 0.8;
   margin-left: 3px;
   margin-bottom: 30px;
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const MetadataInfo = styled.div`
@@ -66,6 +84,13 @@ const MetadataInfo = styled.div`
 
   &:not(:first-of-type) {
     margin-left: 28px;
+  }
+
+  @media (max-width: ${MEDIA_QUERY_SIZES.M}) {
+    &:not(:first-of-type) {
+      margin-left: 0;
+      margin-top: 6px;
+    }
   }
 `;
 
@@ -85,6 +110,7 @@ const PostAuthorWrapper = styled.div`
 interface IDummyContentProps {
   children: string;
 }
+
 const DummyContent: React.SFC<IDummyContentProps> = ({ children }) => {
   return (
     <React.Fragment>
@@ -157,36 +183,39 @@ const DummyContent: React.SFC<IDummyContentProps> = ({ children }) => {
 
 const PostPage: React.SFC<IPostPageProps> = ({ post }) => {
   return (
-    <article className="center">
-      <PostContent>
+    <Container>
+      <section>
         <HeroImage src={post.imageUrl} />
 
-        <Title>{post.title}</Title>
+        <div className="center">
+          <Title>{post.title}</Title>
+          <Metadata>
+            <MetadataInfo>
+              <FontAwesomeIcon icon={faCalendarAlt} />
+              <MetadataInfoText>June 27th, 2019</MetadataInfoText>
+            </MetadataInfo>
+            <MetadataInfo>
+              <FontAwesomeIcon icon={faTags} />
+              <MetadataInfoText>
+                Travel, Amsterdam, Euro-travel
+              </MetadataInfoText>
+            </MetadataInfo>
+          </Metadata>
 
-        <Metadata>
-          <MetadataInfo>
-            <FontAwesomeIcon icon={faCalendarAlt} />
-            <MetadataInfoText>June 27th, 2019</MetadataInfoText>
-          </MetadataInfo>
-          <MetadataInfo>
-            <FontAwesomeIcon icon={faTags} />
-            <MetadataInfoText>Travel, Amsterdam, Euro-travel</MetadataInfoText>
-          </MetadataInfo>
-        </Metadata>
+          <ContentWrapper>
+            <DummyContent>{post.content}</DummyContent>
+          </ContentWrapper>
 
-        <ContentWrapper>
-          <DummyContent>{post.content}</DummyContent>
-        </ContentWrapper>
-      </PostContent>
+          <SharePostButtonsWrapper>
+            <SharePostButtons />
+          </SharePostButtonsWrapper>
 
-      <SharePostButtonsWrapper>
-        <SharePostButtons />
-      </SharePostButtonsWrapper>
-
-      <PostAuthorWrapper>
-        <PostAuthor />
-      </PostAuthorWrapper>
-    </article>
+          <PostAuthorWrapper>
+            <PostAuthor />
+          </PostAuthorWrapper>
+        </div>
+      </section>
+    </Container>
   );
 };
 

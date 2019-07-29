@@ -7,6 +7,7 @@ const styles = css`
   }
 
   h1 {
+    font-weight: 700;
     font-size: 64px;
   }
 
