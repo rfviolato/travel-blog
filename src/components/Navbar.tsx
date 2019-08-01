@@ -193,9 +193,13 @@ const solidLinkStyle = css`
 
 const Navbar: React.SFC<INavbarProps> = ({ isSolid }) => {
   const [isMenuActive, setMenuActive] = useState(false);
+<<<<<<< HEAD
   const toggleMenu = useCallback(() => setMenuActive(!isMenuActive), [
     isMenuActive,
   ]);
+=======
+  const toggleMenu = useCallback(() => setMenuActive((active) => !active), []);
+>>>>>>> 62377f716ff2df4a6bdaceafae21a156ba1c5e36
 
   // TODO: Once the number of links will probably come from the API, do this dynamically
   const DELAYS = [
