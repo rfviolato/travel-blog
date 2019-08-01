@@ -2,16 +2,26 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/pro-light-svg-icons';
+import { graphql, useStaticQuery } from 'gatsby';
 
 interface IAllPostsProps {
-  posts: IAllPostsListItem[];
+  posts: IAllPostsNode[];
+}
+
+interface IPostFields {
+  slug: string;
+}
+
+interface IPostFrontmatter {
+  date: string;
+  templateKey: string;
+  title: string;
 }
 
 interface IPostProps {
-  title: string;
-  description: string;
-  imageSrc: string;
-  createdAt: string;
+  // fields: IPostFields;
+  excerpt: string;
+  frontmatter: IPostFrontmatter;
 }
 
 interface IAllPostsListItem extends IPostProps {
@@ -123,7 +133,7 @@ const PostContentWrapper = styled.div`
   border-bottom-right-radius: ${BORDER_RADIUS};
 `;
 
-const PostContentPreview = styled.div`
+const PostExcerpt = styled.div`
   flex-direction: column;
   margin-top: 5px;
   font-size: 15px;
@@ -137,14 +147,14 @@ const Date = styled.div`
   font-weight: 700;
 `;
 
-const Post: React.SFC<IPostProps> = ({ title, description, imageSrc }) => {
+const Post: React.SFC<IPostProps> = ({ frontmatter, excerpt }) => {
   return (
     <PostContainer>
-      <Image src={imageSrc} />
+      {/* <Image src={imageSrc} /> */}
       <PostContentWrapper>
         <div>
-          <h3>{title}</h3>
-          <PostContentPreview>{description}</PostContentPreview>
+          <h3>{frontmatter.title}</h3>
+          <PostExcerpt>{excerpt}</PostExcerpt>
         </div>
         <Date>June 27th, 2019</Date>
       </PostContentWrapper>
@@ -176,13 +186,55 @@ const Container = styled.div`
 `;
 
 const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
+  console.log({ posts });
+
   return (
     <Container>
-      {posts.map((post) => (
-        <Post key={post.id} {...post} />
+      {posts.map(({ node: post }) => (
+        <Post
+          key={post.id}
+          frontmatter={post.frontmatter}
+          excerpt={post.excerpt}
+        />
       ))}
     </Container>
   );
 };
 
-export default AllPosts;
+interface IAllPostsNode {
+  node: IAllPostsListItem;
+}
+
+interface IGatsbyStaticQuery {
+  allMarkdownRemark: {
+    edges: IAllPostsNode[];
+  };
+}
+
+export default () => {
+  const data: IGatsbyStaticQuery = useStaticQuery(graphql`
+    query AllPostsQuery {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+      ) {
+        edges {
+          node {
+            excerpt(pruneLength: 400)
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              templateKey
+              date(formatString: "MMMM DD, YYYY")
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  return <AllPosts posts={data.allMarkdownRemark.edges} />;
+};
