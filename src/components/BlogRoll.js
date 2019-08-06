@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql, StaticQuery } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, graphql, StaticQuery } from 'gatsby';
 
 class BlogRoll extends React.Component {
   render() {
-    const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
+    const { data } = this.props;
+    const { edges: posts } = data.allMarkdownRemark;
 
     return (
       <div className="columns is-multiline">
@@ -37,7 +37,7 @@ class BlogRoll extends React.Component {
             </div>
           ))}
       </div>
-    )
+    );
   }
 }
 
@@ -47,7 +47,7 @@ BlogRoll.propTypes = {
       edges: PropTypes.array,
     }),
   }),
-}
+};
 
 export default () => (
   <StaticQuery
@@ -55,7 +55,7 @@ export default () => (
       query BlogRollQuery {
         allMarkdownRemark(
           sort: { order: DESC, fields: [frontmatter___date] }
-          filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+          filter: { frontmatter: { templateKey: { eq: "post-page" } } }
         ) {
           edges {
             node {
@@ -76,4 +76,4 @@ export default () => (
     `}
     render={(data, count) => <BlogRoll data={data} count={count} />}
   />
-)
+);

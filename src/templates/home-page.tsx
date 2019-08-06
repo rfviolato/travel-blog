@@ -3,10 +3,10 @@ import React from 'react';
 import { FeaturedPosts, Hero, RecentPosts } from '../components/home/index';
 import Layout from '../components/Layout';
 
-type IHeroQueryData = IGastbyQueryData<{ image: IGastbyImage }>;
+type IHeroQueryData = IGastbyQueryData<{ image: IGatsbySharImageQueryResult }>;
 
 interface IHomePageTemplateProps {
-  heroImg: IGastbyImage;
+  heroImg: IGatsbySharImageQueryResult;
 }
 
 const mockFeaturedPostsData = [

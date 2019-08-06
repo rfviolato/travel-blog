@@ -4,11 +4,13 @@ import React from 'react';
 const styles = css`
   body {
     font-family: 'Quicksand';
+    line-height: 1.25em;
   }
 
   h1 {
     font-weight: 700;
     font-size: 64px;
+    line-height: 1.3;
   }
 
   h2 {
@@ -17,6 +19,7 @@ const styles = css`
 
   h3 {
     font-size: 32px;
+    line-height: 1.2;
   }
 
   h4 {

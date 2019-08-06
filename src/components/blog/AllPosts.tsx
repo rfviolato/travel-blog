@@ -2,7 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/pro-light-svg-icons';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 interface IAllPostsProps {
   posts: IAllPostsNode[];
@@ -16,10 +17,11 @@ interface IPostFrontmatter {
   date: string;
   templateKey: string;
   title: string;
+  featuredImage: IGatsbySharImageQueryResult;
 }
 
 interface IPostProps {
-  // fields: IPostFields;
+  fields: IPostFields;
   excerpt: string;
   frontmatter: IPostFrontmatter;
 }
@@ -73,7 +75,7 @@ const OverlayIcon = styled.i`
   transition: transform ${HOVER_TRANSITION_OPTIONS};
 `;
 
-const PostContainer = styled.a`
+const PostContainer = styled(Link)`
   display: flex;
   position: relative;
   color: inherit;
@@ -99,7 +101,7 @@ const PostContainer = styled.a`
   }
 `;
 
-const Image = styled.img`
+const Image = styled(Img)`
   display: block;
   width: 100%;
   height: 21vw;
@@ -135,9 +137,8 @@ const PostContentWrapper = styled.div`
 
 const PostExcerpt = styled.div`
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 12px;
   font-size: 15px;
-  line-height: 1.25em;
 `;
 
 const Date = styled.div`
@@ -147,10 +148,10 @@ const Date = styled.div`
   font-weight: 700;
 `;
 
-const Post: React.SFC<IPostProps> = ({ frontmatter, excerpt }) => {
+const Post: React.SFC<IPostProps> = ({ frontmatter, excerpt, fields }) => {
   return (
-    <PostContainer>
-      {/* <Image src={imageSrc} /> */}
+    <PostContainer to={fields.slug}>
+      <Image fluid={frontmatter.featuredImage.childImageSharp.fluid} />
       <PostContentWrapper>
         <div>
           <h3>{frontmatter.title}</h3>
@@ -186,8 +187,6 @@ const Container = styled.div`
 `;
 
 const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
-  console.log({ posts });
-
   return (
     <Container>
       {posts.map(({ node: post }) => (
@@ -195,6 +194,7 @@ const AllPosts: React.SFC<IAllPostsProps> = ({ posts }) => {
           key={post.id}
           frontmatter={post.frontmatter}
           excerpt={post.excerpt}
+          fields={post.fields}
         />
       ))}
     </Container>
@@ -216,7 +216,7 @@ export default () => {
     query AllPostsQuery {
       allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] }
-        filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+        filter: { frontmatter: { templateKey: { eq: "post-page" } } }
       ) {
         edges {
           node {
@@ -229,6 +229,13 @@ export default () => {
               title
               templateKey
               date(formatString: "MMMM DD, YYYY")
+              featuredImage {
+                childImageSharp {
+                  fluid(maxHeight: 300, maxWidth: 435, quality: 80) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
             }
           }
         }
