@@ -1,6 +1,7 @@
 ---
 templateKey: blog-post
 title: The best free Amsterdam summer events in 2019
+featured-image: /img/3.jpg
 date: 2019-08-01T17:51:57.222Z
 description: >-
   The best things in life - and summer vacation - are free. From food festivals
