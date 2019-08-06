@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faTags } from '@fortawesome/pro-light-svg-icons';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import {
   Blockquote,
   Image,
@@ -12,16 +13,14 @@ import {
 import Layout from './../components/Layout';
 
 interface IPostProps {
-  id: string;
+  date: string;
   title: string;
-  content: string;
-  imageUrl: string;
-  createdAt: Date;
+  description: string;
+  tags: string;
+  featuredImage: IGatsbySharImageQueryResult;
 }
 
-interface IPostTemplateProps {
-  post: IPostProps;
-}
+type IPostTemplateProps = IGastbyQueryData<IPostProps>;
 
 interface IHeroImageProps {
   src: string;
@@ -30,15 +29,6 @@ interface IHeroImageProps {
 const MEDIA_QUERY_SIZES = {
   M: '600px',
 };
-
-const HeroImage = styled.div<IHeroImageProps>`
-  width: 100%;
-  height: 550px;
-  background-image: ${({ src }) => `url(${src})`};
-  /* background-position: 50% 50%; */
-  background-position: 50% 60%; /* TODO: Remove this when bg is dynamic */
-  background-size: cover;
-`;
 
 const Title = styled.h1`
   margin-top: 10px;
@@ -55,7 +45,7 @@ const Container = styled.article`
   margin-bottom: 80px;
 `;
 
-const ContentWrapper = styled.div`
+const Description = styled.div`
   margin-top: 30px;
   font-size: 16px;
 `;
@@ -193,19 +183,27 @@ const post = {
   createdAt: new Date(),
 };
 
-const PostTemplate: React.SFC<IPostTemplateProps> = () => {
+const PostTemplate: React.SFC<IPostTemplateProps> = ({
+  data: { markdownRemark },
+}) => {
+  const {
+    frontmatter: { date, title, featuredImage },
+    html: __html, //TODO: Find out how to type this.
+  } = markdownRemark;
+  console.log({ markdownRemark });
+
   return (
     <Layout solidHeader={true}>
       <Container>
         <section>
-          <HeroImage src={post.imageUrl} />
+          <Img fluid={featuredImage.childImageSharp.fluid} />
 
           <div className="center">
-            <Title>{post.title}</Title>
+            <Title>{title}</Title>
             <Metadata>
               <MetadataInfo>
                 <FontAwesomeIcon icon={faCalendarAlt} />
-                <MetadataInfoText>June 27th, 2019</MetadataInfoText>
+                <MetadataInfoText>{date}</MetadataInfoText>
               </MetadataInfo>
               <MetadataInfo>
                 <FontAwesomeIcon icon={faTags} />
@@ -215,9 +213,7 @@ const PostTemplate: React.SFC<IPostTemplateProps> = () => {
               </MetadataInfo>
             </Metadata>
 
-            <ContentWrapper>
-              <DummyContent>{post.content}</DummyContent>
-            </ContentWrapper>
+            <Description dangerouslySetInnerHTML={{ __html }} />
 
             <SharePostButtonsWrapper>
               <SharePostButtons />
@@ -243,6 +239,13 @@ export const pageQuery = graphql`
         title
         description
         tags
+        featuredImage {
+          childImageSharp {
+            fluid(maxHeight: 550, maxWidth: 1400, quality: 90) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
